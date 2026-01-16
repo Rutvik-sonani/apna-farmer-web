@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { images } from '../../utils/images';
 import { getProxiedUrl } from '../../utils/urlUtils';
 import Modal from '../../components/Modal';
+import ComingSoonModal from '../../components/ComingSoonModal';
 import PostRequirement from './PostRequirement/PostRequirement';
 import { fetchCropCategories, fetchRequirements } from '../../services/homeService';
 import { fetchAgroShops } from '../../services/agroShopService';
@@ -92,6 +93,7 @@ const Home = () => {
     const [currentAdIndex, setCurrentAdIndex] = useState(0);
     const [showPostRequirementModal, setShowPostRequirementModal] = useState(false);
     const [showSellCropModal, setShowSellCropModal] = useState(false);
+    const [showComingSoon, setShowComingSoon] = useState<{ open: boolean; title: string }>({ open: false, title: '' });
     const [loading, setLoading] = useState(true);
     const [categories, setCategories] = useState<Category[]>([]);
     const [requirements, setRequirements] = useState<RequirementPost[]>([]);
@@ -481,7 +483,7 @@ const Home = () => {
                                         navigate('/community');
                                     } else {
                                         // For other services, navigate to coming soon or appropriate page
-                                        alert(`${service.name} - Coming Soon`);
+                                        setShowComingSoon({ open: true, title: service.name });
                                     }
                                 }}
                                 style={{
@@ -1043,6 +1045,13 @@ const Home = () => {
                     <p>{t.COMING_SOON || 'Coming Soon'}</p>
                 </div>
             </Modal>
+            {/* Coming Soon Modal */}
+            <ComingSoonModal
+                isOpen={showComingSoon.open}
+                onClose={() => setShowComingSoon({ open: false, title: '' })}
+                title={`${showComingSoon.title} Coming Soon`}
+                message={`We are working hard to bring ${showComingSoon.title} feature to you. Stay tuned!`}
+            />
         </div>
     );
 };

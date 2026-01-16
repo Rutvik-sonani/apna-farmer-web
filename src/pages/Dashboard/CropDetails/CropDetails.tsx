@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Phone, MessageCircle, Heart, MapPin, Calendar, Package } from 'lucide-react';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import { getProxiedUrl } from '../../../utils/urlUtils';
+import { fetchCropById } from '../../../services/cropService';
+import { toggleFavorite as toggleFavoriteService } from '../../../services/favoriteService';
 import type { Crop } from '../../../types';
 
 interface CropDetailsData extends Crop {
@@ -11,6 +13,7 @@ interface CropDetailsData extends Crop {
     createdAt?: string;
     state?: string; // Explicitly add state if missing in Crop
     imagesUrl?: string[]; // Ensure this is present
+    [key: string]: any; // Allow other props
 }
 
 const CropDetails = () => {
@@ -22,40 +25,18 @@ const CropDetails = () => {
     const [isFavorite, setIsFavorite] = useState(false);
 
     const fetchCropDetails = useCallback(async () => {
+        if (!id) return;
         try {
             setLoading(true);
-            // Mock data for now
-            const mockCrop: CropDetailsData = {
-                _id: id || '',
-                cropNames: [{ name: 'Fresh Tomatoes' }],
-                qut: 500,
-                qutAvailable: 'KG',
-                rate: 20,
-                rateType: 'KG',
-                quality: 'Grade A',
-                description: 'Fresh organic tomatoes harvested yesterday. Perfect for retail and wholesale.',
-                harvestDate: '2024-12-20',
-                isOrganic: true,
-                user: {
-                    firstName: 'Ram',
-                    lastName: 'Lal',
-                    mobile: '9876543210',
-                    address: 'Village Rampur, Nashik'
-                },
-                city: 'Nashik',
-                district: 'Nashik',
-                state: 'Maharashtra',
-                imagesUrl: [
-                    'https://placehold.co/600x400?text=Tomatoes+1',
-                    'https://placehold.co/600x400?text=Tomatoes+2',
-                    'https://placehold.co/600x400?text=Tomatoes+3'
-                ],
-                createdAt: '2024-12-22'
-            };
-            // Real API: const response = await api.get(`${endPoints.SELL_CROP}/${id}`);
-            setCrop(mockCrop);
+            const response = await fetchCropById(id);
+            if (response.success && response.data) {
+                setCrop(response.data as unknown as CropDetailsData);
+            } else {
+                setCrop(null);
+            }
         } catch (error) {
             console.error(error);
+            setCrop(null);
         } finally {
             setLoading(false);
         }
@@ -78,9 +59,19 @@ const CropDetails = () => {
         }
     };
 
-    const toggleFavorite = () => {
-        setIsFavorite(!isFavorite);
-        // Call API to add/remove favorite
+    const toggleFavoriteHandler = async () => {
+        if (!id) return;
+        try {
+            const newStatus = !isFavorite;
+            setIsFavorite(newStatus); // Optimistic update
+            const result = await toggleFavoriteService(id, 'CROP', newStatus);
+            if (!result || !result.success) {
+                setIsFavorite(!newStatus); // Revert if failed
+            }
+        } catch (error) {
+            console.error('Error toggling favorite:', error);
+            setIsFavorite(!isFavorite); // Revert on error
+        }
     };
 
     if (loading) {
@@ -114,7 +105,7 @@ const CropDetails = () => {
                     <h3 style={{ margin: 0 }}>Crop Details</h3>
                 </div>
                 <button
-                    onClick={toggleFavorite}
+                    onClick={toggleFavoriteHandler}
                     style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                 >
                     <Heart size={24} fill={isFavorite ? '#ff4d4d' : 'none'} color={isFavorite ? '#ff4d4d' : '#666'} />

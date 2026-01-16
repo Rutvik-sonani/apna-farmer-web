@@ -4,6 +4,8 @@ import FarmerCard from '../../../components/cards/FarmerCard';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyState from '../../../components/EmptyState';
 import Modal from '@/components/Modal';
+import { fetchMyCrops as fetchMyCropsService } from '../../../services/cropService';
+import { localDb } from '../../../services/endpoints';
 import type { Crop } from '../../../types';
 
 interface CropWithStatus extends Crop {
@@ -26,29 +28,24 @@ const MyCrops = () => {
     const fetchMyCrops = async () => {
         try {
             setLoading(true);
-            // Mock user's posted crops
-            const mockCrops = [
-                {
-                    _id: '1',
-                    cropNames: [{ name: 'Wheat' }],
-                    qut: 100,
-                    qutAvailable: 'KG',
-                    rate: 25,
-                    rateType: 'KG',
-                    quality: 'Grade A',
-                    user: { firstName: 'You', lastName: '', mobile: '9876543210' },
-                    city: 'Your City',
-                    imagesUrl: ['https://placehold.co/300x200?text=Wheat'],
-                    status: 'ACTIVE',
-                    createdAt: new Date().toISOString()
+            const authData = localStorage.getItem(localDb.AUTH);
+            if (!authData) return;
+
+            const parsed = JSON.parse(authData);
+            const userId = parsed?.user?.id || parsed?.user?._id || parsed?.id || parsed?._id;
+
+            if (userId) {
+                const response = await fetchMyCropsService(userId);
+                if (response.success && response.data) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    setCrops((response.data as any).docs || response.data as unknown as CropWithStatus[]);
+                } else {
+                    setCrops([]);
                 }
-            ];
-            // Real API call would be:
-            // const res = await api.get(endPoints.MY_CROPS);
-            // setCrops(res.data || []);
-            setCrops(mockCrops as unknown as CropWithStatus[]);
+            }
         } catch (error) {
             console.error(error);
+            setCrops([]);
         } finally {
             setLoading(false);
         }

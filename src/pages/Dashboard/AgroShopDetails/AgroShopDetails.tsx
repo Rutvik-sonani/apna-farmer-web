@@ -2,9 +2,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Phone, MessageCircle, Heart, MapPin, Star, Building2, Clock, DollarSign, ArrowLeft, Share2 } from 'lucide-react';
 import { images } from '../../../utils/images';
 import { getProxiedUrl } from '../../../utils/urlUtils';
+import { fetchAgroShopById } from '../../../services/agroShopService';
+import { toggleFavorite as toggleFavoriteService } from '../../../services/favoriteService';
+import LoadingSpinner from '../../../components/LoadingSpinner';
+import { useState, useEffect } from 'react';
 
-// Mock data - in real app, fetch from API using the ID
-// Mock data - in real app, fetch from API using the ID
 interface AgroShopData {
     _id?: string;
     firstName?: string;
@@ -39,77 +41,77 @@ interface AgroShopData {
     };
 }
 
-const mockAgroShops: Record<string, AgroShopData> = {
-    '1': {
-        _id: '1',
-        firstName: 'Rajesh',
-        lastName: 'Kumar',
-        mobile: '9876543210',
-        whatsappNumber: '9876543210',
-        email: 'rajesh@agroshop.com',
-        avatar: images.App,
-        city: 'Mandsaur',
-        district: 'Mandsaur',
-        state: 'Madhya Pradesh',
-        country: 'India',
-        address: 'Tehsil Road, Mandsaur',
-        rating: 4.5,
-        agroshops: {
-            shop: {
-                name: 'Kisan Seva Kendra',
-                businessType: 'Seeds & Fertilizers',
-                businessNumber: '9876543210'
-            },
-            images: [images.App, images.App],
-            aboutUs: 'Quality agricultural supplies and expert advice for farmers. We provide certified seeds, organic fertilizers, and farming equipment.',
-            offer: {
-                discount: '10',
-                discountType: 'PERCENTAGE'
-            },
-            operatingHours: {
-                openingTime: '09:00',
-                closingTime: '18:00'
-            }
-        }
-    },
-    '2': {
-        _id: '2',
-        firstName: 'Sunil',
-        lastName: 'Patel',
-        mobile: '9123456789',
-        whatsappNumber: '9123456789',
-        email: 'sunil@agroshop.com',
-        avatar: images.App,
-        city: 'Indore',
-        district: 'Indore',
-        state: 'Madhya Pradesh',
-        country: 'India',
-        address: 'Main Market, Indore',
-        rating: 4.2,
-        agroshops: {
-            shop: {
-                name: 'Agro World',
-                businessType: 'Farming Tools & Equipment',
-                businessNumber: '9123456789'
-            },
-            images: [images.App, images.App],
-            aboutUs: 'Complete range of farming tools and equipment. We offer quality products at competitive prices.',
-            offer: {
-                discount: '15',
-                discountType: 'PERCENTAGE'
-            },
-            operatingHours: {
-                openingTime: '08:00',
-                closingTime: '20:00'
-            }
-        }
-    }
-};
-
 const AgroShopDetails = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const shop = mockAgroShops[id || '1'] || mockAgroShops['1'];
+    const [shop, setShop] = useState<AgroShopData | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const toggleFavoriteHandler = async () => {
+        if (!id) return;
+        try {
+            const newStatus = !isFavorite;
+            setIsFavorite(newStatus);
+            const result = await toggleFavoriteService(id, 'AGROSHOP', newStatus);
+            if (!result || !result.success) {
+                setIsFavorite(!newStatus);
+            }
+        } catch (error) {
+            console.error('Error toggling favorite:', error);
+            setIsFavorite(!isFavorite);
+        }
+    };
+
+    useEffect(() => {
+        const loadShopDetails = async () => {
+            if (!id) return;
+            try {
+                setLoading(true);
+                // Try to fetch from API
+                const result = await fetchAgroShopById(id);
+                if (result.success && result.data) {
+                    setShop(result.data as unknown as AgroShopData);
+                } else {
+                    setError('Shop not found');
+                }
+            } catch (err) {
+                console.error('Error fetching shop details:', err);
+                setError('Failed to load shop details');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadShopDetails();
+    }, [id]);
+
+    if (loading) {
+        return <LoadingSpinner fullScreen text="Loading shop details..." />;
+    }
+
+    if (error || !shop) {
+        return (
+            <div style={{ padding: '2rem', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <h2 style={{ color: 'var(--title)' }}>{error || 'Shop not found'}</h2>
+                <button
+                    onClick={() => navigate(-1)}
+                    style={{
+                        marginTop: '1rem',
+                        padding: '0.75rem 1.5rem',
+                        background: 'var(--green)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '8px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Go Back
+                </button>
+            </div>
+        );
+    }
 
     const handleCall = (phone?: string) => {
         if (!phone) return;
@@ -465,6 +467,7 @@ const AgroShopDetails = () => {
                             </button>
 
                             <button
+                                onClick={toggleFavoriteHandler}
                                 style={{
                                     padding: '0.75rem 1rem',
                                     background: 'white',
@@ -486,7 +489,7 @@ const AgroShopDetails = () => {
                                     e.currentTarget.style.background = 'white';
                                 }}
                             >
-                                <Heart size={20} />
+                                <Heart size={20} fill={isFavorite ? 'var(--green)' : 'none'} color="var(--green)" />
                             </button>
                         </div>
                     </div>
