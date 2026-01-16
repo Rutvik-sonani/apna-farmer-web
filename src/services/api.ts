@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { localDb } from './endpoints';
+import { localDb, baseUrl } from './endpoints';
 
 const api = axios.create({
-    baseURL: '/api/',
+    baseURL: baseUrl,
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

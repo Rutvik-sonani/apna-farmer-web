@@ -1,4 +1,7 @@
-export const baseUrl = '/api/';
+const envBaseUrl = import.meta.env.VITE_API_BASE_URL;
+export const baseUrl = envBaseUrl
+  ? (envBaseUrl.endsWith('/') ? envBaseUrl : `${envBaseUrl}/`)
+  : '/api/';
 
 export const endPoints = {
   //Auth Api
