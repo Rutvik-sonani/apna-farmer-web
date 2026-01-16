@@ -1,0 +1,599 @@
+/* Card Components Styles */
+
+.farmer-card,
+.buyer-card,
+.agro-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.farmer-card:hover,
+.buyer-card:hover,
+.agro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Farmer Card */
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.favorite-btn:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.favorite-btn.favorited {
+    background: rgba(255, 77, 77, 0.2);
+}
+
+.quality-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: var(--green);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111;
+}
+
+.price-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--green);
+}
+
+.quantity {
+    font-size: 0.9rem;
+    color: #666;
+    background: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.farmer-info {
+    margin-bottom: 0.75rem;
+}
+
+.farmer-name {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.card-actions .btn-sm {
+    flex: 1;
+    min-width: 80px;
+}
+
+/* Buyer Card */
+.buyer-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.buyer-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: #DFF0DD;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buyer-info-main {
+    flex: 1;
+}
+
+.buyer-name {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111;
+}
+
+.favorite-btn-inline {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.buyer-card-body {
+    padding: 1rem;
+}
+
+.buyer-categories {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1rem;
+    padding: 8px 12px;
+    background: #DFF0DD;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--green);
+}
+
+.buyer-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Agro Card */
+.agro-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.agro-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rating-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.agro-card-body {
+    padding: 1rem;
+}
+
+.agro-shop-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111;
+}
+
+.owner-name {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.shop-type {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.agro-location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.75rem;
+}
+
+/* Button Utilities */
+.btn-primary,
+.btn-secondary {
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: linear-gradient(to top right, var(--gradient-start), var(--gradient-end));
+    color: white;
+    padding: 10px 16px;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: linear-gradient(to top right, var(--gradient-start), var(--gradient-end));
+    color: white;
+    padding: 10px 16px;
+}
+
+.btn-secondary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Agro Card Web - Matching Mobile App Layout */
+.agro-card-web {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--white3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.agro-card-web:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.agro-image-wrapper-web {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-color);
+}
+
+.agro-image-web {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.agro-card-body-web {
+    flex: 1;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.agro-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.agro-shop-name-web {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--title);
+    flex: 1;
+    margin-right: 0.5rem;
+}
+
+.agro-follow-btn {
+    background: transparent;
+    border: none;
+    color: var(--green);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.25rem 0.75rem;
+    white-space: nowrap;
+}
+
+.agro-follow-btn:hover {
+    color: var(--splash);
+}
+
+.agro-owner-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--subtitle);
+}
+
+.agro-location-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.agro-location-text {
+    font-size: 0.9rem;
+    color: var(--subtitle);
+    flex: 1;
+}
+
+.agro-offer-text {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--green);
+    font-weight: 500;
+}
+
+.agro-action-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    align-items: center;
+}
+
+.agro-action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--white3);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.agro-action-btn:hover {
+    background: var(--bg-color);
+    border-color: var(--light-green);
+}
+
+.agro-action-btn.liked {
+    background: var(--lightred);
+    border-color: var(--red);
+}
+
+/* Responsive Agro Card */
+@media (max-width: 768px) {
+    .agro-card-web {
+        flex-direction: column;
+    }
+
+    .agro-image-wrapper-web {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 1rem;
+    }
+
+    .agro-card-body-web {
+        margin-left: 0;
+    }
+
+    .agro-action-row {
+        flex-wrap: wrap;
+    }
+}
+
+/* Buyer Card Web - Matching Mobile App Layout */
+.buyer-card-web {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--white3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.buyer-card-web:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.buyer-image-wrapper-web {
+    width: 85px;
+    height: 85px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-color);
+}
+
+.buyer-image-web {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.buyer-card-body-web {
+    flex: 1;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.buyer-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+}
+
+.buyer-name-web {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--splash);
+    flex: 1;
+}
+
+.buyer-owner-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--title);
+}
+
+.buyer-location-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.buyer-location-text {
+    font-size: 0.9rem;
+    color: var(--green);
+    flex: 1;
+}
+
+.buyer-business-type {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: var(--title);
+}
+
+.buyer-crops-text {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: var(--title);
+}
+
+.buyer-action-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.buyer-action-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid var(--white3);
+    background: var(--light-green);
+    background-color: rgba(0, 89, 13, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.buyer-action-btn:hover {
+    background: var(--bg-color);
+    border-color: var(--light-green);
+}
+
+.buyer-action-btn.liked {
+    background: var(--lightred);
+    border-color: var(--red);
+}
+
+.buyers-list-web {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Responsive Buyer Card */
+@media (max-width: 768px) {
+    .buyer-card-web {
+        flex-direction: column;
+    }
+
+    .buyer-image-wrapper-web {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 1rem;
+    }
+
+    .buyer-card-body-web {
+        margin-left: 0;
+    }
+
+    .buyer-action-row {
+        flex-wrap: wrap;
+    }
+}

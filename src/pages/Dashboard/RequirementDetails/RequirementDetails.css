@@ -1,0 +1,32 @@
+.details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.details-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 1.5rem;
+}
+
+.details-sidebar-sticky {
+    position: sticky;
+    top: 100px;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .details-grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .details-sidebar-sticky {
+        position: static;
+        width: 100%;
+    }
+
+    .details-container {
+        padding: 1rem;
+    }
+}

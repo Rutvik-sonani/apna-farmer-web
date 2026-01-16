@@ -1,0 +1,81 @@
+import { useEffect, useState } from 'react';
+import { fetchTermsConditions } from '../../services/cmsService';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import EmptyState from '../../components/EmptyState';
+
+const TermsConditions = () => {
+    const [content, setContent] = useState<string>('');
+    const [title, setTitle] = useState<string>('Terms & Conditions');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchContent();
+    }, []);
+
+    const fetchContent = async () => {
+        try {
+            setLoading(true);
+            const result = await fetchTermsConditions();
+            if (result?.success && result?.data) {
+                // Handle different response structures
+                const data = result.data;
+                if (Array.isArray(data) && data.length > 0) {
+                    const termsData = data.find((item) =>
+                        item.type === 'terms-conditions' ||
+                        item.slug === 'terms-conditions' ||
+                        item.title?.toLowerCase().includes('terms')
+                    ) || data[0];
+                    setContent(termsData.content || termsData.description || '');
+                    setTitle(termsData.title || 'Terms & Conditions');
+                } else if (data.content || data.description) {
+                    setContent(data.content || data.description);
+                    setTitle(data.title || 'Terms & Conditions');
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching terms & conditions:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return <LoadingSpinner text="Loading Terms & Conditions..." />;
+    }
+
+    return (
+        <div className="cms-page container" style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto' }}>
+            <h1 style={{
+                color: 'var(--green)',
+                fontSize: '2rem',
+                fontWeight: 700,
+                marginBottom: '1.5rem'
+            }}>
+                {title}
+            </h1>
+            {content ? (
+                <div
+                    className="cms-content"
+                    style={{
+                        background: 'white',
+                        padding: '2rem',
+                        borderRadius: '12px',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                        lineHeight: '1.8',
+                        color: '#333'
+                    }}
+                    dangerouslySetInnerHTML={{ __html: content }}
+                />
+            ) : (
+                <EmptyState
+                    icon="📄"
+                    title="Content Not Available"
+                    description="Terms & Conditions content is not available at the moment"
+                />
+            )}
+        </div>
+    );
+};
+
+export default TermsConditions;
+

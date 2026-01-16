@@ -1,0 +1,80 @@
+
+> apna-farmer-react@0.0.0 lint
+> eslint .
+
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Auth\Login.tsx
+  37:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Auth\OtpVerify.tsx
+   82:66  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  123:63  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Dashboard\AgroShopDetails\AgroShopDetails.tsx
+  7:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Dashboard\AgroShop\AgroShop.tsx
+  56:8  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array     react-hooks/exhaustive-deps
+  62:8  warning  React Hook useEffect has a missing dependency: 'fetchVendors'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Dashboard\Farmers\Farmers.tsx
+  59:8   warning  React Hook useEffect has a missing dependency: 'fetchCrops'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  63:8   warning  React Hook useEffect has a missing dependency: 'fetchCrops'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  98:29  warning  React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead     react-hooks/exhaustive-deps
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Dashboard\Favorites\Favorites.tsx
+  16:27  error    Unexpected any. Specify a different type                                                                               @typescript-eslint/no-explicit-any
+  35:8   warning  React Hook useEffect has a missing dependency: 'fetchFavoritesData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  45:91  error    Unexpected any. Specify a different type                                                                               @typescript-eslint/no-explicit-any
+  58:76  error    Unexpected any. Specify a different type                                                                               @typescript-eslint/no-explicit-any
+  59:78  error    Unexpected any. Specify a different type                                                                               @typescript-eslint/no-explicit-any
+  60:77  error    Unexpected any. Specify a different type                                                                               @typescript-eslint/no-explicit-any
+  61:80  error    Unexpected any. Specify a different type                                                                               @typescript-eslint/no-explicit-any
+  72:54  error    Unexpected any. Specify a different type                                                                               @typescript-eslint/no-explicit-any
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Dashboard\Home.tsx
+   99:28  error    Unexpected any. Specify a different type                                                                @typescript-eslint/no-explicit-any
+  121:73  error    Unexpected any. Specify a different type                                                                @typescript-eslint/no-explicit-any
+  123:86  error    Unexpected any. Specify a different type                                                                @typescript-eslint/no-explicit-any
+  133:73  error    Unexpected any. Specify a different type                                                                @typescript-eslint/no-explicit-any
+  139:77  error    Unexpected any. Specify a different type                                                                @typescript-eslint/no-explicit-any
+  238:8   warning  React Hook useEffect has a missing dependency: 'ads'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Dashboard\PostRequirement\PostRequirement.tsx
+   30:98  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   47:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   96:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  101:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  205:81  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  243:88  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  278:89  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Dashboard\RequirementDetails\RequirementDetails.tsx
+  9:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Dashboard\Sell\SellCrop.tsx
+  80:62  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Profile\EditBasicInfo.tsx
+  115:33   error  Unnecessary escape character: \[  no-useless-escape
+  115:37   error  Unnecessary escape character: \.  no-useless-escape
+  115:45   error  Unnecessary escape character: \"  no-useless-escape
+  115:58   error  Unnecessary escape character: \[  no-useless-escape
+  115:62   error  Unnecessary escape character: \.  no-useless-escape
+  115:70   error  Unnecessary escape character: \"  no-useless-escape
+  115:79   error  Unnecessary escape character: \"  no-useless-escape
+  115:83   error  Unnecessary escape character: \"  no-useless-escape
+  115:99   error  Unnecessary escape character: \.  no-useless-escape
+  115:107  error  Unnecessary escape character: \"  no-useless-escape
+  115:124  error  Unnecessary escape character: \.  no-useless-escape
+  115:132  error  Unnecessary escape character: \"  no-useless-escape
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\pages\Profile\Profile.tsx
+  63:8  warning  React Hook useEffect has a missing dependency: 'fetchUserProfile'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rutviks\OneDrive - infopercept.com\Desktop\New folder\apna-farmer\apna-farmer-react\src\services\api.ts
+  57:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  66:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 47 problems (39 errors, 8 warnings)
+
