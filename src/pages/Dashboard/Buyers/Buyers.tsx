@@ -63,7 +63,7 @@ const Buyers = () => {
             if (result?.success && result?.data?.docs) {
                 const formattedCategories = [
                     { _id: 'all', name: 'All' },
-                    ...result.data.docs.map((cat) => ({
+                    ...result.data.docs.map((cat: Category) => ({
                         _id: cat._id || cat.id,
                         id: cat._id || cat.id,
                         name: cat.name || ''

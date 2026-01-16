@@ -92,8 +92,8 @@ const AgroShop = () => {
     // Format categories for CategoryList
     const formattedCategories = categories.length > 0
         ? categories.map((cat) => ({
-            id: cat._id || cat.id,
-            _id: cat._id || cat.id,
+            id: cat._id || cat.id || '',
+            _id: cat._id || cat.id || '',
             name: cat.name || '',
             icon: cat.icon || cat.name?.split(' ')[0] || '🌾'
         }))

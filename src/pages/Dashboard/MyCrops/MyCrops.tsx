@@ -46,7 +46,7 @@ const MyCrops = () => {
             // Real API call would be:
             // const res = await api.get(endPoints.MY_CROPS);
             // setCrops(res.data || []);
-            setCrops(mockCrops);
+            setCrops(mockCrops as unknown as CropWithStatus[]);
         } catch (error) {
             console.error(error);
         } finally {

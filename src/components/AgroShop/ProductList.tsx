@@ -3,9 +3,21 @@ import { images } from '../../utils/images';
 import { getProxiedUrl } from '../../utils/urlUtils';
 import './AgroShop.css';
 
+interface Product {
+    id?: string;
+    _id?: string;
+    name?: string;
+    image?: string;
+    avatarUrl?: string; // fallback if image not present
+    discount?: string;
+    tag?: string; // e.g. 'Best Seller'
+    location?: string;
+    [key: string]: unknown;
+}
+
 interface ProductListProps {
     title?: string;
-    products?: unknown[]; // Accepting mapped AgroShopData
+    products?: Product[];
 }
 
 const ProductList = ({ title = 'Recommended for you', products = [] }: ProductListProps) => {
@@ -37,7 +49,7 @@ const ProductList = ({ title = 'Recommended for you', products = [] }: ProductLi
             >
                 {products.map((product) => (
                     <div
-                        key={product.id || product._id}
+                        key={product.id || product._id || Math.random().toString()}
                         className="product-card"
                         style={{
                             minWidth: '200px', // Fixed width for horizontal items
@@ -49,7 +61,7 @@ const ProductList = ({ title = 'Recommended for you', products = [] }: ProductLi
                         <div className="product-image-container" style={{ height: '160px' }}>
                             <img
                                 src={getProxiedUrl(product.image || product.avatarUrl || images.App)}
-                                alt={product.name}
+                                alt={product.name || 'Product'}
                                 crossOrigin="anonymous"
                                 style={{
                                     width: '100%',

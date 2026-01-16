@@ -90,7 +90,7 @@ const Marketplace = () => {
     };
 
     // Debounce search
-    const debounceTimeout = useRef<ReturnType<typeof setTimeout>>();
+    const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const debouncedSearch = useCallback(
         (text: string) => {

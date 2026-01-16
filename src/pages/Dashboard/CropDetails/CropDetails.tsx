@@ -9,6 +9,8 @@ interface CropDetailsData extends Crop {
     harvestDate?: string;
     isOrganic?: boolean;
     createdAt?: string;
+    state?: string; // Explicitly add state if missing in Crop
+    imagesUrl?: string[]; // Ensure this is present
 }
 
 const CropDetails = () => {
@@ -91,6 +93,7 @@ const CropDetails = () => {
 
     const farmerName = `${crop.user?.firstName || ''} ${crop.user?.lastName || ''}`.trim();
     const location = [crop.city, crop.district, crop.state].filter(Boolean).join(', ');
+    const images = crop.imagesUrl || [];
 
     return (
         <div className="crop-details-page" style={{ paddingBottom: '80px' }}>
@@ -121,12 +124,12 @@ const CropDetails = () => {
             {/* Image Gallery */}
             <div style={{ position: 'relative', background: '#000' }}>
                 <img
-                    src={getProxiedUrl(crop.imagesUrl[currentImageIndex])}
+                    src={getProxiedUrl(images[currentImageIndex] || '')}
                     alt={crop.cropNames?.[0]?.name}
                     crossOrigin="anonymous"
                     style={{ width: '100%', height: '300px', objectFit: 'contain' }}
                 />
-                {crop.imagesUrl.length > 1 && (
+                {images.length > 1 && (
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -137,7 +140,7 @@ const CropDetails = () => {
                         left: 0,
                         right: 0
                     }}>
-                        {crop.imagesUrl.map((_, index: number) => (
+                        {images.map((_, index: number) => (
                             <div
                                 key={index}
                                 onClick={() => setCurrentImageIndex(index)}
@@ -193,7 +196,7 @@ const CropDetails = () => {
                         <div style={{ fontSize: '0.75rem', color: '#999', marginBottom: '4px' }}>HARVEST DATE</div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Calendar size={16} color="#666" />
-                            <span>{new Date(crop.harvestDate).toLocaleDateString()}</span>
+                            <span>{crop.harvestDate ? new Date(crop.harvestDate).toLocaleDateString() : 'N/A'}</span>
                         </div>
                     </div>
                     <div style={{ background: '#f9f9f9', padding: '12px', borderRadius: '8px' }}>

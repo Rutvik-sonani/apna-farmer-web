@@ -70,7 +70,7 @@ const SelectRole = () => {
             const result = await selectUserRole(selectedRole);
             dispatch(authAction.loadigData(false));
 
-            if (result?.statusCode === 200 || result?.statusCode === '200' || result?.success) {
+            if (result?.statusCode == 200 || result?.success) {
                 // Update auth data with userType if authData exists
                 if (authData) {
                     const updatedAuthData = { ...authData, userType: selectedRole };

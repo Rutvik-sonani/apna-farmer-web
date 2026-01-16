@@ -28,7 +28,7 @@ interface FarmerCardProps {
             state?: string;
             country?: string;
         };
-        location?: {
+        location?: string | {
             coordinates?: number[];
         };
         createdAt?: string;

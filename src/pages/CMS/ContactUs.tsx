@@ -21,8 +21,10 @@ const ContactUs = () => {
         setError('');
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async (e?: React.FormEvent) => {
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
 
         // Validation
         if (!formData.name || !formData.email || !formData.mobile || !formData.message) {
@@ -275,7 +277,8 @@ const ContactUs = () => {
 
                         <CustomButton
                             title="Send Message"
-                            onPress={handleSubmit}
+                            // If CustomButton triggers form submit, onPress might not be needed or should match signature
+                            onPress={() => { void handleSubmit(); }}
                             isLoading={loading}
                             icon={<Send size={18} />}
                         />
